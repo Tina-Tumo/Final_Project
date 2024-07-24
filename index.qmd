@@ -4,6 +4,21 @@ title: "website"
 
 
 
+```{r}
+library(tidyverse)
+data <- read_csv("artik.csv")
+```
+
+```{r}
+
+data |>
+  ggplot(mapping = aes(x = time, y = pm1)) + geom_point(aes(col="state", size="popdensity")) + geom_smooth(method="loess", se=F) 
+```
+
+
+
+
+
 
 
 
