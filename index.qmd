@@ -13,34 +13,31 @@ library(ggplot2)
 library(dplyr)
 library(latticeExtra)
 
- 
 ```
 
 ```{r}
+data2 <- read_csv("sevan.csv")
+data3 <- read_csv("ashotsk.csv")
+data4 <- read_csv("azatan.csv")
+data5 <- read_csv("gavar.csv")
+data6 <- read_csv("maralik.csv")
+data7 <- read_csv("panik.csv")
+data8 <- read_csv("vazgen.csv")
+data_new <- data
+data_new$year <- strftime(data_new$time, "%Y")
+data_new$month <- strftime(data_new$time, "%m")
+data_new$week <- strftime(data_new$time, "%w")
 data |>
   ggplot(mapping = aes(x = pm2_5, y = pm1)) + geom_point(aes(col="state", size="popdensity")) + geom_smooth(method="loess", se=F) 
-g <- ggplot(data, aes(x = temperature))
-g + geom_density(aes(fill=factor("cyl"))) 
+
+ggplot() + geom_smooth(data_new, mapping = aes(x = time, y = temperature)) + geom_smooth(data2, mapping = aes(x = time, y = temperature)) + geom_smooth(data3, mapping = aes(x = time, y = temperature)) +geom_smooth(data4, mapping = aes(x = time, y = temperature)) + geom_smooth(data5, mapping = aes(x = time, y = temperature)) + geom_smooth(data6, mapping = aes(x = time, y = temperature)) + geom_smooth(data7, mapping = aes(x = time, y = temperature)) + geom_smooth(data8, mapping = aes(x = time, y = temperature), color = "orange")
 
 
-#data$date <- ymd_hms(data$time)
-#data$year <- year(data$time)
-#data$hour <- hour(data$time)
-#data$month <- month(data$time)
-#data$day <- day(data$time)
-#data_daily <- timeAverage(data, avg.time = "day")
-#head(data_daily)
-#data_monthly <- timeAverage(data, avg.time = "month")
-#head(data_monthly)
-#data_yearly <- timeAverage(data, avg.time = "year")
-#head(data_monthly)
+ggplot() + geom_line(data_new, mapping = aes(x = time, y = pm1)) + geom_line(data2, mapping = aes(x = time, y = pm1)) + geom_line(data3, mapping = aes(x = time, y = pm1)) +geom_line(data4, mapping = aes(x = time, y = pm1)) + geom_line(data5, mapping = aes(x = time, y = pm1)) + geom_line(data6, mapping = aes(x = time, y = pm1)) + geom_line(data7, mapping = aes(x = time, y = pm1)) + geom_line(data8, mapping = aes(x = time, y = pm1), color = "orange")
 
-
-#timePlot(selectByDate(data, year = 2024, month = "may"),
-#pollutant = c("pm2_5", "pm10", "ws"),
-#y.relation = "free")
-
-
+timePlot(selectByDate(data_new, year = 2024, month = "may"),
+         pollutant = c("pm2_5", "pm10"),
+         y.relation = "free")
 
 ```
 
@@ -57,6 +54,28 @@ data |>
   ggplot(data, mapping = aes(x = pm1, y = time)) + 
   geom_point(stat="identity", size=6) 
 ```
+
+
+
+
+
+#data$date <- ymd_hms(data$time)
+#data$year <- year(data$time)
+#data$hour <- hour(data$time)
+#data$month <- month(data$time)
+#data$day <- day(data$time)
+#data_daily <- timeAverage(data, avg.time = "day")
+#head(data_daily)
+#data_monthly <- timeAverage(data, avg.time = "month")
+#head(data_monthly)
+#data_yearly <- timeAverage(data, avg.time = "year")
+#head(data_monthly)
+
+
+#timePlot(selectByDate(data, year = 2024, month = "may"),
+#         pollutant = c("pm2_5", "pm10", "ws"),
+#y.relation = "free")
+
 
 
 
