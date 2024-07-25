@@ -7,13 +7,67 @@ title: "website"
 ```{r}
 library(tidyverse)
 data <- read_csv("artik.csv")
+library(openair)
+library(lubridate)
+library(ggplot2)
+library(dplyr)
+library(latticeExtra)
+
+ 
+```
+
+```{r}
+data |>
+  ggplot(mapping = aes(x = pm2_5, y = pm1)) + geom_point(aes(col="state", size="popdensity")) + geom_smooth(method="loess", se=F) 
+g <- ggplot(data, aes(x = temperature))
+g + geom_density(aes(fill=factor("cyl"))) 
+
+
+#data$date <- ymd_hms(data$time)
+#data$year <- year(data$time)
+#data$hour <- hour(data$time)
+#data$month <- month(data$time)
+#data$day <- day(data$time)
+#data_daily <- timeAverage(data, avg.time = "day")
+#head(data_daily)
+#data_monthly <- timeAverage(data, avg.time = "month")
+#head(data_monthly)
+#data_yearly <- timeAverage(data, avg.time = "year")
+#head(data_monthly)
+
+
+#timePlot(selectByDate(data, year = 2024, month = "may"),
+#pollutant = c("pm2_5", "pm10", "ws"),
+#y.relation = "free")
+
+
+
 ```
 
 ```{r}
 
 data |>
-  ggplot(mapping = aes(x = time, y = pm1)) + geom_point(aes(col="state", size="popdensity")) + geom_smooth(method="loess", se=F) 
+  ggplot(data, mapping = aes(x = time, y=pm1)) + 
+  geom_bar(stat="identity", fill="tomato3")
+
 ```
+
+```{r}
+data |>
+  ggplot(data, mapping = aes(x = pm1, y = time)) + 
+  geom_point(stat="identity", size=6) 
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 

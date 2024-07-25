@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 150faaf2-3d5e-46aa-9217-1c2e696529b3
+      url: 'https://tina.quarto.pub/website'
