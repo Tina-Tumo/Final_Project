@@ -6,7 +6,7 @@ title: "website"
 
 ```{r}
 library(tidyverse)
-data <- read_csv("artik.csv")
+
 library(openair)
 library(lubridate)
 library(ggplot2)
@@ -23,6 +23,7 @@ data5 <- read_csv("gavar.csv")
 data6 <- read_csv("maralik.csv")
 data7 <- read_csv("panik.csv")
 data8 <- read_csv("vazgen.csv")
+data <- read_csv("artik.csv")
 data_new <- data
 data_new$year <- strftime(data_new$time, "%Y")
 data_new$month <- strftime(data_new$time, "%m")
@@ -35,14 +36,27 @@ ggplot() + geom_smooth(data_new, mapping = aes(x = time, y = temperature)) + geo
 
 ggplot() + geom_line(data_new, mapping = aes(x = time, y = pm1)) + geom_line(data2, mapping = aes(x = time, y = pm1)) + geom_line(data3, mapping = aes(x = time, y = pm1)) +geom_line(data4, mapping = aes(x = time, y = pm1)) + geom_line(data5, mapping = aes(x = time, y = pm1)) + geom_line(data6, mapping = aes(x = time, y = pm1)) + geom_line(data7, mapping = aes(x = time, y = pm1)) + geom_line(data8, mapping = aes(x = time, y = pm1), color = "orange")
 
-timePlot(selectByDate(data_new, year = 2024, month = "may"),
-         pollutant = c("pm2_5", "pm10"),
-         y.relation = "free")
 
 ```
 
-```{r}
 
+```{r}
+library(openair)
+data_new <- data_new[-c(4, 5, 15)]
+
+summaryPlot(
+  selected_data,
+  type = "density",
+  avg.time = "hour",
+  period = "months",
+  col.trend = "BLACK",
+  col.data = "green"
+)
+   
+```
+
+
+```{r}
 data |>
   ggplot(data, mapping = aes(x = time, y=pm1)) + 
   geom_bar(stat="identity", fill="tomato3")
