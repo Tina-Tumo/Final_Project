@@ -1,13 +1,15 @@
 ---
 title: "Data Analysis"
-author: "Tina"
-editor: visual
+execute: 
+  warning: false
 ---
 
 ```{r}
+#| message: false
+#| echo: false
 
+#| warning: false
 library(tidyverse)
-
 library(openair)
 library(lubridate)
 library(ggplot2)
@@ -17,12 +19,15 @@ library(latticeExtra)
 
 ```
 
+**The correlation of pm1 and pm2,5**
+
 ```{r}
 #| message: false
-
 #| echo: false
-#| label: setup
+
 #| warning: false
+
+
 
 data2 <- read_csv("sevan.csv")
 data3 <- read_csv("ashotsk.csv")
@@ -37,19 +42,51 @@ data_new$year <- strftime(data_new$time, "%Y")
 data_new$month <- strftime(data_new$time, "%m")
 data_new$week <- strftime(data_new$time, "%w")
 data |>
-  ggplot(mapping = aes(x = pm2_5, y = pm1)) + geom_point(aes(col="state", size="popdensity")) + geom_smooth(method="loess", se=F) 
-
-ggplot() + geom_smooth(data_new, mapping = aes(x = time, y = temperature)) + geom_smooth(data2, mapping = aes(x = time, y = temperature)) + geom_smooth(data3, mapping = aes(x = time, y = temperature)) +geom_smooth(data4, mapping = aes(x = time, y = temperature)) + geom_smooth(data5, mapping = aes(x = time, y = temperature)) + geom_smooth(data6, mapping = aes(x = time, y = temperature)) + geom_smooth(data7, mapping = aes(x = time, y = temperature)) + geom_smooth(data8, mapping = aes(x = time, y = temperature), color = "orange")
-
-
-ggplot() + geom_smooth(data_new, mapping = aes(x = time, y = pm1)) + geom_smooth(data2, mapping = aes(x = time, y = pm1)) + geom_smooth(data3, mapping = aes(x = time, y = pm1)) +geom_smooth(data4, mapping = aes(x = time, y = pm1)) + geom_smooth(data5, mapping = aes(x = time, y = pm1)) + geom_smooth(data6, mapping = aes(x = time, y = pm1)) + geom_smooth(data7, mapping = aes(x = time, y = pm1)) + geom_smooth(data8, mapping = aes(x = time, y = pm1), color = "orange")
-
-
-
+  ggplot(mapping = aes(x = pm2_5, y = pm1)) + geom_point(aes(col="state", size="popdensity")) + geom_smooth(method="loess", se=F)
 
 ```
 
+**Description**
+
+This plot shows that the numbers of pm1 and pm 2,5 are almost the same.
+
+**The presence of temperature by time**
+
 ```{r}
+#| message: false
+#| echo: false
+
+#| warning: false
+ggplot() + geom_smooth(data_new, mapping = aes(x = time, y = temperature)) + geom_smooth(data2, mapping = aes(x = time, y = temperature)) + geom_smooth(data3, mapping = aes(x = time, y = temperature)) +geom_smooth(data4, mapping = aes(x = time, y = temperature)) + geom_smooth(data5, mapping = aes(x = time, y = temperature)) + geom_smooth(data6, mapping = aes(x = time, y = temperature)) + geom_smooth(data7, mapping = aes(x = time, y = temperature)) + geom_smooth(data8, mapping = aes(x = time, y = temperature), color = "orange")
+```
+
+```{}
+```
+
+**Description**
+
+Thanks to this plot, we can compare temperatures in different cities in Armenia.
+
+**The presence of pm1 by time**
+
+```{r}
+
+ggplot() + geom_smooth(data_new, mapping = aes(x = time, y = pm1)) + geom_smooth(data2, mapping = aes(x = time, y = pm1)) + geom_smooth(data3, mapping = aes(x = time, y = pm1)) +geom_smooth(data4, mapping = aes(x = time, y = pm1)) + geom_smooth(data5, mapping = aes(x = time, y = pm1)) + geom_smooth(data6, mapping = aes(x = time, y = pm1)) + geom_smooth(data7, mapping = aes(x = time, y = pm1)) + geom_smooth(data8, mapping = aes(x = time, y = pm1), color = "orange") 
+
+```
+
+**Description**
+
+Thanks to this graph, we can compare air pollution in different cities in Armenia.
+
+```{}
+```
+
+```{r}
+#| message: false
+#| echo: false
+
+#| warning: false
 #library(openair)
 #data_new <- data_new[-c(4, 5, 15)]
 
@@ -59,28 +96,53 @@ ggplot() + geom_smooth(data_new, mapping = aes(x = time, y = pm1)) + geom_smooth
 ```{}
 ```
 
+**Air pollution by month**
+
 ```{r}
+#| message: false
+#| echo: false
+
+#| warning: false
 data |>
   ggplot(data, mapping = aes(x = pm1, y = time)) + 
   geom_point(stat="identity", size=6) 
 ```
 
+**Description**
+
+This graph shows air pollution by month.
+
+**The presence of pm1, pm2.5, pm10 in the air by months**
+
 ```{r}
+#| message: false
+#| echo: false
+
+#| warning: false
 data |>
-  ggplot() + geom_point(mapping = aes(y = pm2_5, x = time, col="pm2,5", size="popdensity")) +  geom_point(mapping = aes(y = pm10, x = time, col="pm10", size="popdensity")) + geom_point(mapping = aes(y = pm1, x = time, col="pm1",  size="popdensity")) +
-  labs(x = "date", y = "pm1, pm2, pm2,5", title = "The presence of pm1, pm2.5, pm10 in the air by months")
+  ggplot() + geom_point(mapping = aes(y = pm2_5, x = time, col="pm2,5", size="popdensity")) +  geom_point(mapping = aes(y = pm10, x = time, col="pm10")) + geom_point(mapping = aes(y = pm1, x = time, col="pm1")) +
+  labs(x = "date", y = "pm1, pm2, pm2,5")
 ```
 
-```{}
-```
+**Description**
+
+This graph shows the number of pm1, pm2,5, pm10 in the air by month.
+
+
 
 ```{r}
-mydata <- data
+#| message: false
+#| echo: false
+
+#| warning: false
+data2 <-data
+data2$year <- strftime(data_new$time, "%Y")
+data2$month <- strftime(data_new$time, "%m")
+data2$week <- strftime(data_new$time, "%w")
+mydata <- data2
 library(openair)
 data("mydata")
 summaryPlot(selectByDate(mydata))
 
 ```
 
-\
-\

@@ -140,7 +140,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><em>Explore real-time data on temperature and air quality to understand how our environment is changing. Our interactive visualizations help you track trends, compare regions, and make informed decisions.</em></p>
 <p>This project aims to delve into the temperature and air pollution levels across various Armenian cities. By analyzing and comparing these factors, we seek to understand the impact of industrial activities, such as factories and mining companies, on air quality and temperature.</p>
+<p><strong>The presence of pm1, pm2.5, pm10 in the air by months</strong></p>
 
 
 
@@ -237,7 +239,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/tina\.quarto\.pub\/website");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

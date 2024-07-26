@@ -3,8 +3,15 @@ title: "The Project"
 ---
 
 
+*Explore real-time data on temperature and air quality to understand how our environment is changing. Our interactive visualizations help you track trends, compare regions, and make informed decisions.*
+
 
 This project aims to delve into the temperature and air pollution levels across various Armenian cities. By analyzing and comparing these factors, we seek to understand the impact of industrial activities, such as factories and mining companies, on air quality and temperature.
+
+
+**The presence of pm1, pm2.5, pm10 in the air by months**
+
+
 
 
 
