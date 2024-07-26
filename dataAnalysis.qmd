@@ -3,3 +3,84 @@ title: "Data Analysis"
 author: "Tina"
 editor: visual
 ---
+
+```{r}
+
+library(tidyverse)
+
+library(openair)
+library(lubridate)
+library(ggplot2)
+library(dplyr)
+library(lattice)
+library(latticeExtra)
+
+```
+
+```{r}
+#| message: false
+
+#| echo: false
+#| label: setup
+#| warning: false
+
+data2 <- read_csv("sevan.csv")
+data3 <- read_csv("ashotsk.csv")
+data4 <- read_csv("azatan.csv")
+data5 <- read_csv("gavar.csv")
+data6 <- read_csv("maralik.csv")
+data7 <- read_csv("panik.csv")
+data8 <- read_csv("vazgen.csv")
+data <- read_csv("artik.csv")
+data_new <- data
+data_new$year <- strftime(data_new$time, "%Y")
+data_new$month <- strftime(data_new$time, "%m")
+data_new$week <- strftime(data_new$time, "%w")
+data |>
+  ggplot(mapping = aes(x = pm2_5, y = pm1)) + geom_point(aes(col="state", size="popdensity")) + geom_smooth(method="loess", se=F) 
+
+ggplot() + geom_smooth(data_new, mapping = aes(x = time, y = temperature)) + geom_smooth(data2, mapping = aes(x = time, y = temperature)) + geom_smooth(data3, mapping = aes(x = time, y = temperature)) +geom_smooth(data4, mapping = aes(x = time, y = temperature)) + geom_smooth(data5, mapping = aes(x = time, y = temperature)) + geom_smooth(data6, mapping = aes(x = time, y = temperature)) + geom_smooth(data7, mapping = aes(x = time, y = temperature)) + geom_smooth(data8, mapping = aes(x = time, y = temperature), color = "orange")
+
+
+ggplot() + geom_smooth(data_new, mapping = aes(x = time, y = pm1)) + geom_smooth(data2, mapping = aes(x = time, y = pm1)) + geom_smooth(data3, mapping = aes(x = time, y = pm1)) +geom_smooth(data4, mapping = aes(x = time, y = pm1)) + geom_smooth(data5, mapping = aes(x = time, y = pm1)) + geom_smooth(data6, mapping = aes(x = time, y = pm1)) + geom_smooth(data7, mapping = aes(x = time, y = pm1)) + geom_smooth(data8, mapping = aes(x = time, y = pm1), color = "orange")
+
+
+
+
+```
+
+```{r}
+#library(openair)
+#data_new <- data_new[-c(4, 5, 15)]
+
+#summaryPlot(data_new)
+```
+
+```{}
+```
+
+```{r}
+data |>
+  ggplot(data, mapping = aes(x = pm1, y = time)) + 
+  geom_point(stat="identity", size=6) 
+```
+
+```{r}
+data |>
+  ggplot() + geom_point(mapping = aes(y = pm2_5, x = time, col="pm2,5", size="popdensity")) +  geom_point(mapping = aes(y = pm10, x = time, col="pm10", size="popdensity")) + geom_point(mapping = aes(y = pm1, x = time, col="pm1",  size="popdensity")) +
+  labs(x = "date", y = "pm1, pm2, pm2,5", title = "The presence of pm1, pm2.5, pm10 in the air by months")
+```
+
+```{}
+```
+
+```{r}
+mydata <- data
+library(openair)
+data("mydata")
+summaryPlot(selectByDate(mydata))
+
+```
+
+\
+\
